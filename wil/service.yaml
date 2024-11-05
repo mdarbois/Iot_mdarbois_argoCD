@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: dev-app-service
+  name: wil-playground
   namespace: dev
 spec:
   type: NodePort # Change to NodePort or LoadBalancer if you need external access
