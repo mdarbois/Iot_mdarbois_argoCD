@@ -3,11 +3,11 @@ kind: Service
 metadata:
   name: wil-playground
 spec:
-  type: NodePort # Change to NodePort or LoadBalancer if you need external access
+  type: NodePort 
   selector:
-    app: dev-app
+    app: wil-playground
   ports:
     - port: 8888
       targetPort: 8888
-      nodePort: 30088  # NodePort to access the service externally (example: 30088)
+      nodePort: 30088  
 
