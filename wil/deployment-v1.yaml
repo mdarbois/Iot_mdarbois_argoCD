@@ -1,24 +1,29 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wil-playground-v1
+  name: wil-playground
+  namespace: dev
   labels:
     app: wil-playground
-    version: v1
 spec:
-  replicas: 1
+  replicas: 2  # Total replicas across versions
   selector:
     matchLabels:
       app: wil-playground
-      version: v1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
   template:
     metadata:
       labels:
         app: wil-playground
-        version: v1
     spec:
       containers:
-      - name: wil-playground
-        image: wil42/playground:v1
-        ports:
-        - containerPort: 8888
+        - name: wil-playground
+          image: wil42/playground:v1  # Starting with v1
+          ports:
+            - containerPort: 8888
+          # Image will change in the same deployment to manage both versions
+          imagePullPolicy: Always
