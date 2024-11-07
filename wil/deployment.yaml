@@ -6,7 +6,7 @@ metadata:
   labels:
     app: wil-playground
 spec:
-  replicas: 2  # Total replicas across versions
+  replicas: 1  # Set to 1 to have only one active Pod per version
   selector:
     matchLabels:
       app: wil-playground
@@ -22,8 +22,6 @@ spec:
     spec:
       containers:
         - name: wil-playground
-          image: wil42/playground:v1  # Starting with v1
+          image: wil42/playground:v1  # Start with v1
           ports:
             - containerPort: 8888
-          # Image will change in the same deployment to manage both versions
-          imagePullPolicy: Always
