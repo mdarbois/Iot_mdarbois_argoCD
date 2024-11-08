@@ -2,13 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: wil-playground
+  namespace: dev
   labels:
     app: wil-playground
 spec:
-  replicas: 1
+  replicas: 1  # Set to 1 to have only one active Pod per version
   selector:
     matchLabels:
       app: wil-playground
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
   template:
     metadata:
       labels:
